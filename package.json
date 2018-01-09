@@ -1,0 +1,9 @@
+{
+  "name": "doqman-dms-api",
+  "version": "1.0.0",
+  "description": "dms-api-backend",
+  "main": "index.js",
+  "repository": "git@github.com:KaiserPhemi/doqman-dms-api.git",
+  "author": "KaiserPhemi <oluwafemi.akinwa@andela.com>",
+  "license": "MIT"
+}

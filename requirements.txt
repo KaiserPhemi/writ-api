@@ -1,8 +1,0 @@
-django-webpack-loader
-dj-database-url
-django
-gunicorn
-psycopg2
-python-decouple
-requests
-whitenoise
