@@ -77,3 +77,7 @@ doqman*
 
 # git
 .gitignore
+
+# system folders
+.DS_Store
+.vscode
