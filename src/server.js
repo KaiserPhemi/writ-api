@@ -1,21 +1,23 @@
 // third-party libraries
 import express from 'express';
-import http from 'http';
 import bodyParser from 'body-parser';
-import path from 'path';
 
 // instantiate express
 const app = express();
 const port = 5555;
 
-// parse incoming request
+// parse incoming requests
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // disable logging server info
 app.disable('x-powered-by');
 
-// start app and listen on port 5555
+app.get('/', (req, res) => {
+  res.send('Hello Node!');
+});
+
+// start app and listen on parsed port
 app.listen(port, (error) => {
   if (error) {
     throw error;

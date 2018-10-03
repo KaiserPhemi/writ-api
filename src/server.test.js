@@ -1,5 +1,4 @@
-// libraries
-import assert from 'assert';
+// third-party libraries
 import { expect } from 'chai';
 
 // modules
