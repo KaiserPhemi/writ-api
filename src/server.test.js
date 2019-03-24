@@ -4,9 +4,7 @@ import { expect } from 'chai';
 // modules
 import app from './server';
 
-/**
- * @desc
- */
+// test suites
 describe('Server', () => {
   it('start & serve app', () => {
     expect(true).to.equal(true);
