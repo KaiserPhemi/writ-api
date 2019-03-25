@@ -9,8 +9,9 @@
 
 ## Development Stack
 
--[Node](https://nodejs.org/en/)
--[MongoDB](https://www.mongodb.com/)
+- [Node](https://nodejs.org/en/)
+- [PostgreSQL](https://www.postgresql.org/)
+- [SequelizeJS](http://docs.sequelizejs.com/)
 
 ## Author
 
