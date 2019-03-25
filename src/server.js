@@ -18,9 +18,11 @@ app.get('/', (req, res) => {
 });
 
 // start app and listen on parsed port
-app.listen(port, (error) => {
-  if (error) {
-    throw error;
-  }
-  console.log(`Server started on port ${port}`);
-});
+if (!module.parent) {
+  app.listen(port, (error) => {
+    if (error) {
+      throw error;
+    }
+    console.log(`Application started. Listening on port: ${port}`);
+  });
+}

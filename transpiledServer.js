@@ -21,10 +21,12 @@ app.get('/', function (req, res) {
   res.send('Hello Node!');
 }); // start app and listen on parsed port
 
-app.listen(port, function (error) {
-  if (error) {
-    throw error;
-  }
+if (!module.parent) {
+  app.listen(port, function (error) {
+    if (error) {
+      throw error;
+    }
 
-  console.log("Server started on port ".concat(port));
-});
+    console.log("Application started. Listening on port: ".concat(port));
+  });
+}

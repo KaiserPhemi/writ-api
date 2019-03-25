@@ -5,7 +5,7 @@
   "scripts": {
     "start": "babel src/server.js --minified --out-file transpiledServer.js && node transpiledServer.js",
     "start:dev": "babel src/server.js --out-file transpiledServer.js && nodemon transpiledServer.js",
-    "test": "mocha --require babel-core/register src/**/**/*.test.js",
+    "test": "mocha --require @babel/register src/**/**/*.test.js",
     "test:dev": "yarn test --watch",
     "cover": "coveralls"
   },
@@ -17,8 +17,10 @@
     "@babel/core": "^7.4.0",
     "@babel/node": "^7.2.2",
     "@babel/preset-env": "^7.4.2",
+    "@babel/register": "^7.4.0",
     "chai": "^4.1.2",
     "coveralls": "^3.0.3",
+    "mocha": "^6.0.2",
     "mocha-lcov-reporter": "^1.3.0",
     "nodemon": "^1.18.3"
   },
