@@ -3,11 +3,10 @@
   "version": "1.0.0",
   "description": "dms-api-backend",
   "scripts": {
-    "start": "babel src/server.js --minified --out-file transpiledServer.js && node transpiledServer.js",
-    "start:dev": "babel src/server.js --out-file transpiledServer.js && nodemon transpiledServer.js",
+    "start": "NODE_ENV=production babel-node src/server.js",
+    "start:dev": "NODE_ENV=development nodemon --exec babel-node src/server.js",
     "test": "mocha --require @babel/register src/**/**/*.test.js",
-    "test:dev": "yarn test --watch",
-    "cover": "coveralls"
+    "test:dev": "yarn test --watch"
   },
   "repository": "git@github.com:KaiserPhemi/doqman-dms-api.git",
   "author": "KaiserPhemi <oluwafemi.akinwa@andela.com>",
@@ -18,6 +17,7 @@
     "@babel/node": "^7.2.2",
     "@babel/preset-env": "^7.4.2",
     "@babel/register": "^7.4.0",
+    "babel-loader": "^8.0.5",
     "chai": "^4.1.2",
     "coveralls": "^3.0.3",
     "mocha": "^6.0.2",
@@ -25,9 +25,9 @@
     "nodemon": "^1.18.3"
   },
   "dependencies": {
-    "body-parser": "^1.18.3",
     "dotenv": "^6.0.0",
     "express": "^4.16.3",
+    "jsonwebtoken": "^8.5.1",
     "pg": "^7.5.0",
     "pg-hstore": "^2.3.2",
     "sequelize": "^4.39.0"

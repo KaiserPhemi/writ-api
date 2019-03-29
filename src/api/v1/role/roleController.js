@@ -1,5 +1,5 @@
 // models
-import db from '../../db/models';
+import db from '../../../db/models';
 
 // controllers
 const roleController = {
@@ -37,7 +37,7 @@ const roleController = {
         res
           .status(200)
           .send({
-            message: 'All roles retrieved successfully',
+            message: 'All roles retrieved successfully!',
             roles
           });
       })
