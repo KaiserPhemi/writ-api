@@ -16,6 +16,7 @@ if (config.use_env_variable) {
     {
       operatorsAliases: false,
       dialect: 'postgres',
+      logging: false,
     },
   );
 } else {
@@ -25,7 +26,8 @@ if (config.use_env_variable) {
     config.password,
     {
       operatorsAliases: false,
-      dialect: 'postgres'
+      dialect: 'postgres',
+      logging: false,
     },
   );
 }
