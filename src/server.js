@@ -12,7 +12,7 @@ const app = express();
 appMiddlewares(app);
 
 // routes
-app.use('/api/v1', mainRouter)
+app.use('/api/v1', mainRouter);
 app.get('/', (req, res) => {
   res
     .status(200)

@@ -44,9 +44,26 @@ const auth = {
   },
 
   verifyToken() { },
-  checkAdminRights() { },
-  verifyInputs(){}
 
+  /**
+   *
+   * @param {*} req
+   * @param {*} res
+   * @param {*} next
+   */
+  checkAdminRights(req, res, next) {
+    next();
+  },
+
+  /**
+   * @desc validates form data
+   * @param {object} req
+   * @param {object} res
+   * @param {func} next
+   */
+  verifyInputs(req, res, next) {
+    next();
+  }
 };
 
 export default auth;

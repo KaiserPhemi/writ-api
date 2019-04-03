@@ -41,11 +41,36 @@ const userController = {
     //check if user logged in is admin
     // get all users in the database
   },
-  createUser() {
-    // check if all fields are valid i.e. all required fields
-    // create user
-    // return user (firstname, lastname, email)
+
+  /**
+   * @desc creates user in the database
+   * @param {object} req
+   * @param {object} res
+   */
+  createUser(req, res) {
+    db.User
+      .create(req.body)
+      .then(user => {
+        // const token = Authentication.getToken(user);
+        // user = Helper.userProfile(user);
+        return res
+          .status(201)
+          .send({
+            message: 'Account created successfully.',
+            // token,
+            user
+          });
+      })
+      .catch(err => {
+        return res
+          .status(500)
+          .send({
+            message: 'An error has occured. Account was not created',
+            error: err
+          });
+      });
   },
+
   logoutUser() {
     // logout user
     // garbage collect resources
