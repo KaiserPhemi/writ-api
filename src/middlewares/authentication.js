@@ -2,6 +2,9 @@
 import dotenv from 'dotenv';
 import jwt from 'jsonwebtoken';
 
+// models
+import db from '../db/models';
+
 // get environment variables
 dotenv.config();
 const secretKey = process.env.JWT_KEY;
@@ -11,10 +14,17 @@ const secretKey = process.env.JWT_KEY;
  */
 const auth = {
 
+  /**
+   * @desc generates a token for user
+   * @param {object} user
+   */
   createToken(user) {
     const userToken = jwt.sign({
-
-    })
+      userId: user.id,
+      roleId: user.roleId
+    },
+      secretKey, { expiresIn: '2d' });
+    return userToken;
   },
 
   /**
@@ -56,7 +66,7 @@ const auth = {
       return res
         .status(400)
         .send({
-          message: 'Unauthorized Access.'
+          message: 'Token not supplied.'
         });
     }
     jwt.verify(token, secretKey, (err, decode) => {
@@ -99,12 +109,12 @@ const auth = {
     next();
   },
 
-   /**
+  /**
    * @desc validates if user has admin rights
    * @param {object} req
    * @param {object} res
    * @param {func} next
-   */
+  */
   checkAdminRights(req, res, next) {
     db.Role
       .findByPk(req.tokenDecode.roleId)
@@ -135,6 +145,102 @@ const auth = {
    * @param {func} next
    */
   verifyInputs(req, res, next) {
+    const {
+      email,
+      firstname,
+      lastname,
+      username,
+      password
+    } = req.body;
+    const userEmail = /\S+@\S+\.\S+/.test(email);
+    const firstName = /\w+/g.test(firstname);
+    const lastName = /\w+/g.test(lastname);
+    const userName = /\w+/g.test(username);
+    const passWord = /\w+/g.test(password);
+
+    if (!userEmail) {
+      return res
+        .status(400)
+        .send({
+          message: 'Please enter a valid email address.'
+        });
+    }
+    if (!firstName || !lastName) {
+      return res
+        .status(400)
+        .send({
+          message: 'Please enter a valid name.'
+        });
+    }
+    if (!userName) {
+      return res
+        .status(400)
+        .send({
+          message: 'Please enter a valid username.'
+        });
+    }
+    if (!passWord) {
+      return res
+        .status(400)
+        .send({
+          message: 'Password field cannot be empty. Please enter a password.'
+        });
+    }
+    if (password.length < 8) {
+      return res
+        .status(400)
+        .send({
+          message: 'Password cannot be less than 8 characters. Try again!'
+        });
+    }
+    next();
+  },
+
+  /**
+   * @desc checks the database for users with matching details
+   * @param {object} req
+   * @param {object} res
+   * @param {func} next
+   */
+  checkExistingUser(req, res, next) {
+    db.User
+      .findOne({ where: { email: req.body.email } })
+      .then(user => {
+        if (user) {
+          return res
+            .status(409)
+            .send({
+              message: 'Email address already exist.'
+            });
+        }
+        db.User
+          .findOne({ where: { userName: req.body.userName } })
+          .then(user => {
+            if (user) {
+              return res
+                .status(409)
+                .send({
+                  message: 'Username already exist.'
+                });
+            }
+          })
+          .catch(err => {
+            return res
+              .status(500)
+              .send({
+                message: 'An error occured.',
+                error: err
+              });
+          });
+      })
+      .catch(err => {
+        return res
+          .status(500)
+          .send({
+            message: 'An error occurred.',
+            error: err
+          });
+      });
     next();
   }
 };
