@@ -213,7 +213,7 @@ const auth = {
               message: 'Email address already exist.'
             });
         }
-        db.User
+        return db.User
           .findOne({ where: { userName: req.body.userName } })
           .then(user => {
             if (user) {

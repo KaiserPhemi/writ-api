@@ -1,5 +1,3 @@
-'use strict';
-
 // dependencies
 const bcrypt = require('bcrypt');
 const saltRounds = 10;
@@ -43,7 +41,7 @@ module.exports = (sequelize, DataTypes) => {
     roleId: {
       type: DataTypes.INTEGER,
       allowNull: true,
-      defaultValue: 3
+      defaultValue: 4
     },
     active: {
       type: DataTypes.BOOLEAN,
@@ -53,9 +51,9 @@ module.exports = (sequelize, DataTypes) => {
   }, {
     classMethods: {
       associate: (models) => {
-        User.hasMany(models.Document, {
-          foreignKey: 'ownerId'
-        });
+        // User.hasMany(models.Document, {
+        //   foreignKey: 'ownerId'
+        // });
         User.belongsTo(models.Role, {
           foreignKey: 'roleId',
           onDelete: 'SET NULL'
@@ -63,9 +61,9 @@ module.exports = (sequelize, DataTypes) => {
       }
     },
     instanceMethods: {
-      generateHash(password) {
-          return bcrypt.hash(password, saltRounds)
-        // this.password = bcrypt.hash(this.password, bcrypt.genSalt(10));
+      generateHash() {
+        this.password = bcrypt.hash(this.password, bcrypt.genSalt(saltRounds))
+        return this.password
       },
       validPassword(password) {
         return bcrypt.compare(password, this.password);
