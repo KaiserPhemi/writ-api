@@ -2,13 +2,13 @@
 import express from 'express';
 
 // controllers
-import {creatRole, getRoles} from '../role/roleController';
+import roleController from '../role/roleController';
 
 const roleRouter = express.Router();
 
-roleRouter.route('/')
-// .post()
-.get(getRoles);
+// routes
+roleRouter.route("/")
+.get(roleController.getRoles);
 
 
 export default roleRouter;

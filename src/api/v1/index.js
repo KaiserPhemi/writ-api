@@ -5,6 +5,7 @@ import express from 'express';
 import roleRouter from './role/roleRoutes';
 const mainRouter = express.Router();
 
+// mount routes
 mainRouter.use('/role', roleRouter);
 
 export default mainRouter;
