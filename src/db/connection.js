@@ -7,6 +7,5 @@ const dbUrl =
     ? process.env.PROD_DB
     : process.env.DEV_DB;
 const pool = new Pool({ dbUrl });
-const client = pool.connect();
 
-export default client;
+export default pool;
