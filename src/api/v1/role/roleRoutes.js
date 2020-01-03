@@ -1,14 +1,15 @@
 // third-party libraries
-import express from 'express';
+import express from "express";
 
 // controllers
-import roleController from '../role/roleController';
+import roleController from "../role/roleController";
 
 const roleRouter = express.Router();
 
 // routes
-roleRouter.route("/")
-.get(roleController.getRoles);
-
+roleRouter
+  .route("/")
+  .post(roleController.createRole)
+  .get(roleController.getRoles);
 
 export default roleRouter;
