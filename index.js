@@ -14,11 +14,12 @@ dotenv.config({ silent: true });
 
 // database connection
 (async () => {
+  const client = await pool.connect();
   try {
-    const response = await pool.query('select now() as "Current_Time"');
+    const response = await client.query('select now() as "Current_Time"');
     console.log("Connected to database at: ", response.rows[0].Current_Time);
   } finally {
-    pool.end();
+    client.release();
   }
 })().catch(err => console.log(err.stack));
 

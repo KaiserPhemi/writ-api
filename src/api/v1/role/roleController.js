@@ -1,9 +1,13 @@
 // database connection
 import pool from "../../../db/connection";
 
+// queries
+import { getAll } from "../../../db/query";
+
+const tableName = "role";
+
 const roleController = {
   createRole(req, res) {
-    console.log("got here", req.body);
     const { title, description } = req.body;
     pool.query(
       `insert into role (title, description) values(${title}, ${description})`,
@@ -21,18 +25,20 @@ const roleController = {
       }
     );
   },
-  getRoles(req, res) {
-    pool.query("select * from role order by id asc", (err, result) => {
-      if (err) {
-        return res.status(404).send({
-          message: "Roles not found",
-          error: err
-        });
-      }
-      return res.status(200).send({
-        roles: result,
-        message: "All roles"
+  async getRoles(req, res) {
+    let result;
+    try {
+      result = await pool.query(getAll(tableName));
+    } catch (err) {
+      return res.status(404).send({
+        message: "An error occured",
+        err
       });
+    }
+
+    return res.send({
+      message: "All roles retrieved successfully.",
+      data: result.rows
     });
   }
 };
