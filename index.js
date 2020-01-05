@@ -1,7 +1,9 @@
 // dependencies
 import * as dotenv from "dotenv";
-import { Client } from "pg";
 import app from "./src/server";
+
+// database client connection
+import pool from "./src/db/connection";
 
 // port
 const port = process.env.PORT || 5555;
@@ -11,12 +13,15 @@ app.set("port", port);
 dotenv.config({ silent: true });
 
 // database connection
-const dbUrl =
-  process.env.NODE_ENV === "production"
-    ? process.env.PROD_DATABASE
-    : process.env.DEV_DATABASE;
-const client = new Client({ dbUrl });
-client.connect();
+(async () => {
+  const client = await pool.connect();
+  try {
+    const response = await client.query('select now() as "Current_Time"');
+    console.log("Connected to database at: ", response.rows[0].Current_Time);
+  } finally {
+    client.release();
+  }
+})().catch(err => console.log(err.stack));
 
 // start app and listen on parsed port
 if (!module.parent) {
