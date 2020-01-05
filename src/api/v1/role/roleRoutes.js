@@ -12,4 +12,9 @@ roleRouter
   .post(roleController.createRole)
   .get(roleController.getRoles);
 
+roleRouter
+  .route("/:id")
+  .put(roleController.updateRole)
+  .delete(roleController.deleteRole);
+
 export default roleRouter;
