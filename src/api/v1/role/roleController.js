@@ -4,7 +4,7 @@ import pool from "../../../db/connection";
 // queries
 import { getAll, createRole, deleteRole, getRole } from "../../../db/query";
 
-const tableName = "role";
+const tableName = "user_role";
 
 /**
  * @desc role controller

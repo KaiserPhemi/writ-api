@@ -12,7 +12,7 @@ export const getAll = dbTable => {
  * @param {string} description
  */
 export const createRole = (title, description) => {
-  return `insert into role (title, description) values ('${title}', '${description}')
+  return `insert into user_role (title, description) values ('${title}', '${description}')
   returning public_id, title, description;`;
 };
 
