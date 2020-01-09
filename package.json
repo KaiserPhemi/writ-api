@@ -5,7 +5,7 @@
   "scripts": {
     "start": "NODE_ENV=production babel-node index.js",
     "start:dev": "NODE_ENV=development nodemon --exec babel-node index.js",
-    "test": "mocha --require @babel/register src/**/**/*.test.js",
+    "test": "NODE_ENV=test mocha --require @babel/register src/**/**/*.test.js",
     "test:dev": "yarn test --watch"
   },
   "repository": "git@github.com:KaiserPhemi/doqman-dms-api.git",
@@ -26,7 +26,8 @@
     "nodemon": "^1.18.3"
   },
   "dependencies": {
-    "bcrypt": "^3.0.5",
+    "@hapi/joi": "^17.0.0",
+    "bcrypt": "^3.0.7",
     "dotenv": "^6.0.0",
     "express": "^4.16.3",
     "jsonwebtoken": "^8.5.1",

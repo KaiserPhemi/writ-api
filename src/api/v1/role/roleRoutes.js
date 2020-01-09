@@ -4,6 +4,7 @@ import express from "express";
 // controllers
 import roleController from "../role/roleController";
 
+// router
 const roleRouter = express.Router();
 
 // routes
