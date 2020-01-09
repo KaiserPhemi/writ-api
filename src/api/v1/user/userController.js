@@ -4,8 +4,9 @@ import pool from "../../../db/connection";
 // sql query string
 import { getAll, createUser } from "../../../db/query";
 
-// middleware
+// utilities
 import { userSchema } from "../../../utils/schemaValidation";
+import { hashPassword } from "../../../utils/encrypt";
 
 const tableName = "user_account";
 
@@ -20,6 +21,8 @@ const userController = {
    */
   async createUser(req, res) {
     const { body } = req;
+    let hashedPwd;
+    let userObject;
     let result;
     try {
       const { error } = userSchema.validate({ ...body });
@@ -28,9 +31,10 @@ const userController = {
           message: "Invalid Input.",
           error: error.details[0].message
         });
-      } else {
-        result = await pool.query(createUser(body));
       }
+      hashedPwd = await hashPassword(body.password);
+      userObject = await Object.assign({}, body, { password: hashedPwd });
+      result = await pool.query(createUser(userObject));
     } catch (err) {
       return res.status(500).send({
         message: "Error encountered. User not created.",
@@ -53,7 +57,7 @@ const userController = {
     try {
       result = await pool.query(getAll(tableName));
     } catch (err) {
-      return res.status(404).send({
+      return res.status(500).send({
         message: "Error encountered.",
         err
       });
@@ -63,6 +67,12 @@ const userController = {
       users: result.rows
     });
   },
+
+  /**
+   * @desc deletes a user
+   * @param {object} req
+   * @param {object} res
+   */
   async deleteUser(req, res) {}
 };
 

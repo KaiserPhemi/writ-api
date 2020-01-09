@@ -18,7 +18,7 @@ export const createRole = (title, description) => {
 
 /**
  * @desc deletes a role from the table
- * @param {int} roleId
+ * @param {string} roleId
  */
 export const deleteRole = roleId => {
   return `delete from role where public_id='${roleId}'
@@ -26,7 +26,7 @@ export const deleteRole = roleId => {
 };
 
 /**
- *
+ * @desc retrieves a single role from the role table
  * @param {string} tableName
  * @param {string} rowId
  */
