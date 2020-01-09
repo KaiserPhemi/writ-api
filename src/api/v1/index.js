@@ -8,7 +8,7 @@ import userRouter from "./user/userRoutes";
 const mainRouter = express.Router();
 
 // mount routes
-mainRouter.use("/role", roleRouter);
-mainRouter.use("/user", userRouter);
+mainRouter.use("/roles", roleRouter);
+mainRouter.use("/users", userRouter);
 
 export default mainRouter;
