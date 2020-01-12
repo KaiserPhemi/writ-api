@@ -24,14 +24,15 @@ const userController = {
     let hashedPwd;
     let userObject;
     let result;
-    try {
-      const { error } = userSchema.validate({ ...body });
-      if (error) {
-        return res.status(401).send({
+    const { error } = userSchema.validate({ ...body });
+    if (error) {
+      return res.status(401)
+        .send({
           message: "Invalid Input.",
           error: error.details[0].message
         });
-      }
+    }
+    try {
       hashedPwd = await hashPassword(body.password);
       userObject = await Object.assign({}, body, { password: hashedPwd });
       result = await pool.query(createUser(userObject));
@@ -73,7 +74,14 @@ const userController = {
    * @param {object} req
    * @param {object} res
    */
-  async deleteUser(req, res) {}
+  async deleteUser(req, res) { },
+  
+  /**
+   * @desc updates a user
+   * @param {object} req
+   * @param {object} res
+   */
+  async updateUser(req,res){}
 };
 
 export default userController;
