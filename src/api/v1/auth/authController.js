@@ -9,6 +9,10 @@ import { loginSchema } from '../../../utils/schemaValidation';
 import { checkUser } from '../../../db/query';
 import { comparePassword } from '../../../utils/encrypt';
 
+// key
+const jwtKey = process.env.JWT_KEY;
+console.log('the env', jwtKey)
+
 /**
  * @desc auth controller
  */
@@ -35,7 +39,7 @@ const authController = {
           message: "Invalid email or password"
         });
     }
-    const validatePassword = await comparePassword(password, user.password);
+    const validatePassword = await comparePassword(password, user.user_password);
     if (!validatePassword) {
       return res.status(400)
         .send({
@@ -43,7 +47,7 @@ const authController = {
         });
     }
     const userToken = jwt.sign({ userId: user.user_id },
-      process.env.JWT_KEY,
+      jwtKey,
       { expiresIn: '24h' });
     return res.status(201)
       .header('x-auth-token', userToken)

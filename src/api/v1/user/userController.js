@@ -32,7 +32,7 @@ const userController = {
           error: error.details[0].message
         });
     }
-    const existingUser = await pool.query(checkUser(body.email));
+    const existingUser = (await pool.query(checkUser(body.email))).rows[0];
     if (existingUser) {
       return res.status(400).send({
         message: `User already registered.`

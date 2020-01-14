@@ -1,16 +1,16 @@
 // dependencies
-import * as dotenv from "dotenv";
+import dotenv from "dotenv";
 import app from "./src/server";
 
 // database client connection
 import pool from "./src/db/connection";
 
+// load env variables & disable logging
+dotenv.config({ silent: true });
+
 // port
 const port = process.env.PORT || 5555;
 app.set("port", port);
-
-// disable logging
-dotenv.config({ silent: true });
 
 // database connection
 (async () => {

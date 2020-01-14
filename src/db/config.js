@@ -1,7 +1,6 @@
-// third-aprty library
-import * as dotenv from "dotenv";
-dotenv.config();
-
+/**
+ * @desc database config 
+ */
 const dbConfig = {
   user: process.env.PG_USER,
   database:

@@ -2,7 +2,7 @@
 import bcrypt from "bcrypt";
 
 // constant
-const SALT_ROUNDS = 17;
+const SALT_ROUNDS = 10;
 
 /**
  * @desc hashes a password
@@ -18,6 +18,5 @@ export const hashPassword = password => {
  * @param {string} hashedPwd 
  */
 export const comparePassword = (password, hashedPwd) => { 
-  console.log('we here', password, hashedPwd)
   return bcrypt.compare(password, hashedPwd);
 };
