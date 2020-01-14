@@ -6,12 +6,11 @@ import pool from '../../../db/connection';
 
 // utilities
 import { loginSchema } from '../../../utils/schemaValidation';
-import { checkUser } from '../../../db/query';
+import { checkUser, setUserActive } from '../../../db/query';
 import { comparePassword } from '../../../utils/encrypt';
 
 // key
 const jwtKey = process.env.JWT_KEY;
-console.log('the env', jwtKey)
 
 /**
  * @desc auth controller
@@ -46,23 +45,21 @@ const authController = {
           message: "Invalid email or password"
         });
     }
-    const userToken = jwt.sign({ userId: user.user_id },
+    const activeUser = (await pool.query(setUserActive(email))).rows[0];
+    const userToken = jwt.sign({
+        userId: activeUser.user_id,
+        roleTitle: activeUser.role_title
+      },
       jwtKey,
-      { expiresIn: '24h' });
+      { expiresIn: '24h' }
+    );
     return res.status(201)
       .header('x-auth-token', userToken)
       .send({
         message: 'User logged in successfully!.',
-        user
+        activeUser
       })
-  },
-  
-  /**
-   * @desc logs out a user
-   * @param {object} req 
-   * @param {object} res 
-   */
-  async logoutUser(req, res){}
+  }
 }
 
 export default authController;

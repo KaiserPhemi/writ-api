@@ -79,3 +79,19 @@ export const createUser = ({
     active,
     role_title;`;
 };
+
+/**
+ * @desc updates a user active status
+ * @param {string} email 
+ */
+export const setUserActive = email => { 
+  return `update user_account set active=true where email='${email}'
+    returning user_id,
+      email,
+      first_name,
+      last_name,
+      user_name,
+      active,
+      role_title,
+      avatar_url;`;
+};
