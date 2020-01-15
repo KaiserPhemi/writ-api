@@ -97,7 +97,7 @@ export const setUserActive = email => {
 };
 
 /**
- * 
+ * @desc
  * @param {string} userId 
  */
 export const updateUser = (userId) => { 
