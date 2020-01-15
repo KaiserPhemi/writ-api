@@ -3,7 +3,8 @@
  * @param {string} dbTable
  */
 export const getAll = dbTable => {
-  return `select * from ${dbTable} order by id asc;`;
+  return `select * from ${dbTable}
+   ;`;
 };
 
 /**
@@ -32,6 +33,14 @@ export const deleteRole = roleId => {
  */
 export const getRole = (tableName, rowId) => {
   return `select * from ${tableName} where public_id='${rowId}';`;
+};
+
+/**
+ * @desc checks if a user exist 
+ * @param {string} email 
+ */
+export const checkUser = email => {
+  return `select * from user_account where email='${email}';`
 };
 
 /**
@@ -69,4 +78,20 @@ export const createUser = ({
     avatar_url,
     active,
     role_title;`;
+};
+
+/**
+ * @desc updates a user active status
+ * @param {string} email 
+ */
+export const setUserActive = email => { 
+  return `update user_account set active=true where email='${email}'
+    returning user_id,
+      email,
+      first_name,
+      last_name,
+      user_name,
+      active,
+      role_title,
+      avatar_url;`;
 };
