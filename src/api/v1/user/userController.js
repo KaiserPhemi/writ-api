@@ -2,11 +2,17 @@
 import pool from "../../../db/connection";
 
 // sql query string
-import { getAll, createUser, checkUser } from "../../../db/query";
+import {
+  getAll,
+  createUser,
+  checkUser,
+  updateUser
+} from "../../../db/query";
 
 // utilities
 import { userSchema } from "../../../utils/schemaValidation";
 import { hashPassword } from "../../../utils/encrypt";
+
 
 const tableName = "user_account";
 
@@ -87,7 +93,11 @@ const userController = {
    * @param {object} req
    * @param {object} res
    */
-  async updateUser(req,res){}
+  async updateUser(req, res) {
+    console.log()
+    console.log('id ',req.params)
+    console.log('details: ',req.body)
+  }
 };
 
 export default userController;

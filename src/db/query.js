@@ -95,3 +95,20 @@ export const setUserActive = email => {
       role_title,
       avatar_url;`;
 };
+
+/**
+ * 
+ * @param {string} userId 
+ */
+export const updateUser = (userId) => { 
+  return `update user_account where user_id='${userId}'
+    returning user_id,
+    email,
+    first_name,
+    last_name,
+    user_name,
+    active,
+    role_title,
+    avatar_url;
+  `;
+};

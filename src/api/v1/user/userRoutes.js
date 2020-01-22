@@ -4,6 +4,9 @@ import express from "express";
 // controllers
 import userController from "./userController";
 
+// middlewares
+import auth from '../../../middlewares/authMiddleware';
+
 // router
 const userRouter = express.Router();
 
@@ -14,7 +17,7 @@ userRouter
   .post(userController.createUser);
 userRouter
   .route("/:id")
-  .put(userController.updateUser)
-  .delete(userController.deleteUser);
+  .put(auth.verifyToken, userController.updateUser)
+  .delete(auth.verifyToken, userController.deleteUser);
 
 export default userRouter;
