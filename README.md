@@ -1,4 +1,4 @@
-# doqman-dms-api
+# writ-api
 
 [![Coverage Status](https://coveralls.io/repos/github/KaiserPhemi/doqman-dms-api/badge.svg)](https://coveralls.io/github/KaiserPhemi/doqman-dms-api)
 [![Maintainability](https://api.codeclimate.com/v1/badges/db53d334ab5bf2f6a6f7/maintainability)](https://codeclimate.com/github/KaiserPhemi/doqman-dms-api/maintainability)
