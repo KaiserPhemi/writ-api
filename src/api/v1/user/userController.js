@@ -94,9 +94,12 @@ const userController = {
    * @param {object} res
    */
   async updateUser(req, res) {
+    // check if the requesting user is either a super-admin ot team admin
+    const { body } = req;
+    const { id } = req.params;
     console.log()
-    console.log('id ',req.params)
-    console.log('details: ',req.body)
+    console.log('id ',id)
+    console.log('details: ',body)
   }
 };
 
