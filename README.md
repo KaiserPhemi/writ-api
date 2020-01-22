@@ -5,13 +5,12 @@
 [![Test Coverage](https://api.codeclimate.com/v1/badges/db53d334ab5bf2f6a6f7/test_coverage)](https://codeclimate.com/github/KaiserPhemi/doqman-dms-api/test_coverage)
 [![CircleCI](https://circleci.com/gh/KaiserPhemi/doqman-dms-api.svg?style=svg)](https://circleci.com/gh/KaiserPhemi/doqman-dms-api)
 
-- Backend for the `doqman` Document Manangement System platform
+- Backend for the `writ` Document Manangement System platform
 
 ## Development Stack
 
 - [Node](https://nodejs.org/en/)
 - [PostgreSQL](https://www.postgresql.org/)
-- [SequelizeJS](http://docs.sequelizejs.com/)
 
 ## Author
 
